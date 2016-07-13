@@ -1,4 +1,4 @@
-# Opentir
+# Opentir-1.0.0
 
 This is a NATO/SPA Codification Tool - according ACodP-1, CodSP-x and other rules.
 
