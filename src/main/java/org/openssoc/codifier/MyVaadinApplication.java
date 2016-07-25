@@ -1,4 +1,4 @@
-package org.opentir.ui;
+package org.openssoc.codifier;
 
 import java.util.Set;
 
@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 
-import org.opentir.model.Operator;
-import org.opentir.ui.BasicCrudView;
+import org.openssoc.codifier.domain.Person;
+import org.openssoc.codifier.ui.BasicCrudView;
 
 import com.vaadin.Application;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
@@ -21,9 +21,9 @@ import com.vaadin.ui.Window;
  * The Application's "main" class
  */
 @SuppressWarnings("serial")
-public class OpentirApplication extends Application {
+public class MyVaadinApplication extends Application {
 
-	public static final String PERSISTENCE_UNIT = "org.opentir.jpa.pu";
+	public static final String PERSISTENCE_UNIT = "org.openssoc.codifier.pu";
 
 	@Override
 	public void init() {
@@ -54,15 +54,13 @@ public class OpentirApplication extends Application {
 			horizontalSplitPanel.addComponent(navTree);
 			setContent(horizontalSplitPanel);
 
-			// add a basic crud view for all entities known by the JPA/model
+			// add a basic crud view for all entities known by the JPA
 			// implementation, most often this is not desired and developers
 			// should just list those entities they want to have editors for
-			
 			Metamodel metamodel = JPAContainerFactory
 					.createEntityManagerForPersistenceUnit(PERSISTENCE_UNIT)
 					.getEntityManagerFactory().getMetamodel();
 			Set<EntityType<?>> entities = metamodel.getEntities();
-			
 			for (EntityType<?> entityType : entities) {
 				Class<?> javaType = entityType.getJavaType();
 				BasicCrudView view = new BasicCrudView(javaType,
@@ -70,9 +68,9 @@ public class OpentirApplication extends Application {
 				navTree.addItem(view);
 				navTree.setItemCaption(view, view.getCaption());
 				navTree.setChildrenAllowed(view, false);
-				if(javaType == Operator.class) {
-					view.setVisibleTableProperties("firstName","lastName");
-					view.setVisibleFormProperties("firstName","lastName", "phoneNumber", "street", "city", "zipCode");
+				if(javaType == Person.class) {
+					view.setVisibleTableProperties("firstName","lastName", "boss");
+					view.setVisibleFormProperties("firstName","lastName", "phoneNumber", "street", "city", "zipCode", "boss");
 				}
 
 			}
@@ -88,16 +86,26 @@ public class OpentirApplication extends Application {
 
 		long size = (Long) em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
 		if (size == 0) {
-			// create one Admin Person objects as initial data
+			// create two Person objects as test data
 
 			em.getTransaction().begin();
-			Operator p = new Operator();
-			p.setFirstName("Admin");
-			p.setLastName("Opentir");
-			p.setCity("Gallifrey");
-			p.setPhoneNumber("+358 02 555 221");
+			Person boss = new Person();
+			boss.setFirstName("John");
+			boss.setLastName("Bigboss");
+			boss.setCity("Turku");
+			boss.setPhoneNumber("+358 02 555 221");
+			boss.setZipCode("20200");
+			boss.setStreet("Ruukinkatu 2-4");
+			em.persist(boss);
+
+			Person p = new Person();
+			p.setFirstName("Marc");
+			p.setLastName("Hardworker");
+			p.setCity("Turku");
+			p.setPhoneNumber("+358 02 555 222");
 			p.setZipCode("20200");
-			p.setStreet("TARDIS 3rd");
+			p.setStreet("Ruukinkatu 2-4");
+			p.setBoss(boss);
 			em.persist(p);
 
 			em.getTransaction().commit();

@@ -92,4 +92,13 @@ This project was split into five packages:
 - exchange - it contains data exchange protocols. there are generators for exporting and digesters for importing generated data.
 - ui -       it contains end-user interfaces for searching, viewing and CRUD (Create/Read/Update//Delete) operations.
 
+
+Layout pattern - functions or operator's interfaces must be developed into four function-groups:
+
+- Searching - all searching should be into this functions group and result will depend on searching criteria.
+- Creating - new items creation and organizations (NATO entities) must be done by this group.
+- Maintaining - all organizations and items into Total Item Record data must be maintained by this functions.
+- Support Table - MRD, SSR, System properties and others non-item and non-entities tables must be created, read, updated and deleted here.
+
+
 The initial version was made by Rogerio, Santos.

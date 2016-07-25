@@ -1,4 +1,4 @@
-package org.opentir.model;
+package org.openssoc.codifier.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Operator {
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +20,7 @@ public class Operator {
     private String zipCode;
     private String phoneNumber;
     @ManyToOne
-    private Operator boss;
+    private Person boss;
 
     public Long getId() {
         return id;
@@ -78,11 +78,11 @@ public class Operator {
         this.phoneNumber = phoneNumber;
     }
 
-    public Operator getBoss() {
+    public Person getBoss() {
         return boss;
     }
 
-    public void setBoss(Operator boss) {
+    public void setBoss(Person boss) {
         this.boss = boss;
     }
     
@@ -93,8 +93,8 @@ public class Operator {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Operator) {
-            Operator p = (Operator) obj;
+        if (obj instanceof Person) {
+            Person p = (Person) obj;
             if (this == p) {
                 return true;
             }
