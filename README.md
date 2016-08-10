@@ -88,7 +88,7 @@ This project was split into five packages:
 
 - acodp1 -   it contains ACodP1 and any other related documents that contain rules and procedures (whithout persistent classes).
 - jpa -      it contais a persistence layer for database connection and ORM.
-- national - it contains national regulations interfaces. No source-code should be put here, due to national security issues.
+- national - it contains national regulations interfaces. No real-source-code should be put here, due to national security issues.
 - exchange - it contains data exchange protocols. there are generators for exporting and digesters for importing generated data.
 - ui -       it contains end-user interfaces for searching, viewing and CRUD (Create/Read/Update//Delete) operations.
 
