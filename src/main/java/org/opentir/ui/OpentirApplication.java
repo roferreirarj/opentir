@@ -6,8 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 
-import org.opentir.model.Operator;
-import org.opentir.ui.BasicCrudView;
+import org.opentir.model.Operator10;
 
 import com.vaadin.Application;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
@@ -70,9 +69,9 @@ public class OpentirApplication extends Application {
 				navTree.addItem(view);
 				navTree.setItemCaption(view, view.getCaption());
 				navTree.setChildrenAllowed(view, false);
-				if(javaType == Operator.class) {
-					view.setVisibleTableProperties("firstName","lastName");
-					view.setVisibleFormProperties("firstName","lastName", "phoneNumber", "street", "city", "zipCode");
+				if(javaType == Operator10.class) {
+					view.setVisibleTableProperties("firstName11","lastName12");
+					view.setVisibleFormProperties("firstName11","lastName12", "phoneNumber16", "street13", "city14", "zipCode15");
 				}
 
 			}
@@ -86,18 +85,18 @@ public class OpentirApplication extends Application {
 		EntityManager em = JPAContainerFactory
 				.createEntityManagerForPersistenceUnit(PERSISTENCE_UNIT);
 
-		long size = (Long) em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
+		long size = (Long) em.createQuery("SELECT COUNT(p) FROM Operator10 p").getSingleResult();
 		if (size == 0) {
 			// create one Admin Person objects as initial data
 
 			em.getTransaction().begin();
-			Operator p = new Operator();
-			p.setFirstName("Admin");
-			p.setLastName("Opentir");
-			p.setCity("Gallifrey");
-			p.setPhoneNumber("+358 02 555 221");
-			p.setZipCode("20200");
-			p.setStreet("TARDIS 3rd");
+			Operator10 p = new Operator10();
+			p.setFirstName11("Admin");
+			p.setLastName12("Opentir");
+			p.setCity14("Gallifrey");
+			p.setPhoneNumber16("+358 02 555 221");
+			p.setZipCode15("20200");
+			p.setStreet13("TARDIS 3rd");
 			em.persist(p);
 
 			em.getTransaction().commit();
